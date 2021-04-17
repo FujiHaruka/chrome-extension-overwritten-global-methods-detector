@@ -1,1 +1,3 @@
-# chrome-extension-global-pollution-detector
+# Overwritten Global Methods Detector for Chrome
+
+Chrome extension to detect overwritten global JavaScript methods in web sites, for example, by polyfill libraries.
