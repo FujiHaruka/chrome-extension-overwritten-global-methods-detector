@@ -13,9 +13,15 @@ window.addEventListener("load", () => {
         return li;
       });
       const list = document.querySelector("#list");
-      overwrittens.forEach((li) => {
-        list.appendChild(li);
-      });
+      if (overwrittens.length > 0) {
+        overwrittens.forEach((li) => {
+          list.appendChild(li);
+        });
+      } else {
+        const p = document.createElement("p");
+        p.textContent = "No overwritten methods found.";
+        list.appendChild(p);
+      }
     }
   });
 });

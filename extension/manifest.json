@@ -10,7 +10,7 @@
   },
   "web_accessible_resources": [
     {
-      "resources": ["injected.js", "popup.js"],
+      "resources": ["injected.js"],
       "matches": ["http://*/*", "https://*/*"]
     }
   ],
