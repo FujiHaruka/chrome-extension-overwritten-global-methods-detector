@@ -67,6 +67,7 @@
       "JSON",
     ];
     const isNativeFunc = NativeFunctionChecker();
+    const overwrittens = [];
     for (const klassName of globals) {
       const klass = window[klassName];
       for (const funcName of Object.getOwnPropertyNames(klass)) {
@@ -74,7 +75,7 @@
           const func = klass[funcName];
           const canonicalName = `${klassName}.${funcName}`;
           if (!isNativeFunc(func, canonicalName)) {
-            console.log(`Overwritten: ${canonicalName}`);
+            overwrittens.push(canonicalName);
           }
         }
       }
@@ -87,14 +88,20 @@
           const func = klass.prototype[funcName];
           const canonicalName = `${klassName}.prototype.${funcName}`;
           if (!isNativeFunc(func, canonicalName)) {
-            console.log(`Overwritten: ${canonicalName}`);
+            overwrittens.push(canonicalName);
           }
         }
       }
     }
+
+    return overwrittens;
   }
 
   setTimeout(() => {
-    listOverwrittenGlobalFunctions();
+    const overwrittens = listOverwrittenGlobalFunctions();
+    window.postMessage({
+      type: "RESPONSE_OVERWRITTEN_FUNCTIONS",
+      payload: overwrittens,
+    });
   }, 100);
 })();
