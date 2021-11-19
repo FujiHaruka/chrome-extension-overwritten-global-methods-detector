@@ -98,10 +98,17 @@
   }
 
   setTimeout(() => {
-    const overwrittens = listOverwrittenGlobalFunctions();
-    window.postMessage({
-      type: "RESPONSE_OVERWRITTEN_FUNCTIONS",
-      payload: overwrittens,
-    });
+    try {
+      console.debug("[global-pollution-detector] executing")
+      const overwrittens = listOverwrittenGlobalFunctions();
+      console.debug("[global-pollution-detector] done")
+      console.debug(overwrittens)
+      window.postMessage({
+        type: "RESPONSE_OVERWRITTEN_FUNCTIONS",
+        payload: overwrittens,
+      });
+    } catch (err) {
+      console.error(err)
+    }
   }, 100);
 })();
